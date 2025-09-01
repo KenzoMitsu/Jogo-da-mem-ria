@@ -8,7 +8,7 @@ export default function Inicio() {
 
     return (
         <ScrollView style={styles.container}>
-            <Image style={styles.image} source={require("../assets/logo.png")} />
+            <Image style={styles.img} source={require("../assets/logo.png")} />
             <Text style={styles.textonorm}>PARABÉNS!</Text>
             <Text style={styles.textonome}>JÚLIA{nome}</Text>
             <Text style={styles.textonorm}>Você foi o ganhador (a)!</Text>
@@ -26,6 +26,15 @@ export default function Inicio() {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#e5ead4",
+    },
+    img: {
+        marginTop: 50,
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        flexDirection: "row",
     },
     textonorm: {
         fontFamily: "Arial",
