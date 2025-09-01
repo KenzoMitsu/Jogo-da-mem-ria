@@ -1,25 +1,19 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, ScrollView} from "react-native";
+import {View, Text, StyleSheet, ScrollView, Image} from "react-native";
 import colors from "../design/colors";
 import Card from "../components/Card";
 
-export default function HomeScreen() {
-    const [lista, setLista] = useState([])
-    const [novaTarefa, setNovaTarefa] = useState("")
-    const [busca, setBusca] = useState("")
-
-    function numTarefasAtivas() {
-        let ativas = lista.filter(tarefa => !tarefa.concluido)
-        return ativas.length
-    }
+export default function Inicio() {
+    const [nome, setnome] = useState([])
+    const [novoUser, setNovoUser] = useState("")
 
     return (
         <ScrollView style={styles.container}>
-            <Header />
-            <FormCadastro fnCadastrar={cadastrarTarefa} texto={novaTarefa} setTexto={setNovaTarefa} />
-
+            <Image style={styles.image} source={require("../assets/logo.png")} />
+            <Text>PARABÉNS!</Text>
+            <Text>{nome}</Text>
+            <Text>Você </Text>
             <View style={styles.botoes}>
-                <BtnCont text={"Tarefas Criadas"} num={numTarefasAtivas()} />
                 <BtnCont text={"Concluídas"} num={numTarefasConcluidas()} isGreen={true}/>
             </View>
             <Search texto={busca} setTexto={setBusca} />
@@ -38,9 +32,6 @@ export default function HomeScreen() {
                 })}
 
 
-            {/*<Card texto={"Estudar para a prova"} />*/}
-            {/*<Card texto={"Limpar a casa"} />*/}
-            {/*<Card texto={"Lavar a louça"} concluido={true}/>*/}
         </ScrollView>
     )
 }
