@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+import Inicio from "./screens/Inicio";
 
 // Importa todas as suas telas (screens)
 import Jogadores from "./screens/Jogadores.jsx";
@@ -30,6 +31,8 @@ export default function App() {
                     component={Parabens}
                     options={{ headerShown: false }}
                 />
+            <Stack.Navigator>
+                <Stack.Screen options={{headerShown: false}} name={"Inicio"} component={Inicio} />
             </Stack.Navigator>
         </NavigationContainer>
     );
