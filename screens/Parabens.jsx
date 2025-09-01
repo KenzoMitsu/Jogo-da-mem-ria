@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, ScrollView, Image} from "react-native";
+import {View, Text, StyleSheet, ScrollView, Image, TouchableOpacity} from "react-native";
 import colors from "../design/colors";
 import Card from "../components/Card";
 
@@ -10,28 +10,16 @@ export default function Inicio() {
     return (
         <ScrollView style={styles.container}>
             <Image style={styles.image} source={require("../assets/logo.png")} />
-            <Text>PARABÉNS!</Text>
-            <Text>{nome}</Text>
-            <Text>Você </Text>
-            <View style={styles.botoes}>
-                <BtnCont text={"Concluídas"} num={numTarefasConcluidas()} isGreen={true}/>
+            <Text style={styles.textonorm}>PARABÉNS!</Text>
+            <Text style={styles.textonome}>{nome}</Text>
+            <Text style={styles.textonorm}>Você foi o ganhador (a)!</Text>
+            <View>
+               <TouchableOpacity style={styles.btn}>
+                   <Text>
+                       JOGAR NOVAMENTE
+                   </Text>
+               </TouchableOpacity>
             </View>
-            <Search texto={busca} setTexto={setBusca} />
-
-            {lista.length === 0 && <EmptyList />}
-
-            {lista.sort((a, b) => a.concluido - b.concluido)
-                .map((item, index) => {
-                    if(item.tarefa.toLowerCase().includes(busca.toLowerCase())) {
-                        return (
-                            <Card key={index} texto={item.tarefa} concluido={item.concluido}
-                                  fnConcluir={() => concluirTarefa(index)} fnExcluir={() => excluirTarefa(index)} />
-                        )
-                    }
-                    return null
-                })}
-
-
         </ScrollView>
     )
 }
@@ -40,13 +28,24 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#e5ead4",
     },
-    botoes: {
+    textonorm: {
+        fontFamily: "Arial",
+        fontSize: 20,
+        color: colors.verde_base,
+    },
+    textonome: {
+        fontFamily: "Arial",
+        fontSize: 20,
+        color: colors.verde_escuro,
+    },
+    btn: {
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 20,
         marginTop: 30,
         borderBottomWidth: 1,
-        borderBottomColor: colors.gray_200,
-        paddingBottom: 20
+        borderBottomColor: colors.verde_escuro,
+        paddingBottom: 20,
+        color: "black",
     }
 })
