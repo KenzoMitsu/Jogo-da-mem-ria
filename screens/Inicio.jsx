@@ -3,14 +3,14 @@ import {View} from "react-native";
 export default function Inicio() {
     return (
         <ImageBackground
-            source={require("../assets/Android Compact - 5.png")} 
+            source={require("../assets/Android Compact - 5.png")}
             style={styles.background}
         >
             <View style={styles.card}>
                 <Text style={styles.titulo}>JUNGLE</Text>
 
                 <Image
-                    source={require("../assets/monkey.png")} // imagem do macaquinho
+                    source={require("../assets/logo.png")} 
                     style={styles.imagem}
                     resizeMode="contain"
                 />
