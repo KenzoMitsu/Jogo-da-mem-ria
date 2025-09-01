@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import {View, Text, StyleSheet, ScrollView, Image, TouchableOpacity} from "react-native";
+import {View, Text, ScrollView, Image, TouchableOpacity, StyleSheet} from "react-native";
 import colors from "../design/colors";
-import Card from "../components/Card";
 
 export default function Inicio() {
     const [nome, setnome] = useState([])
@@ -11,7 +10,7 @@ export default function Inicio() {
         <ScrollView style={styles.container}>
             <Image style={styles.image} source={require("../assets/logo.png")} />
             <Text style={styles.textonorm}>PARABÉNS!</Text>
-            <Text style={styles.textonome}>{nome}</Text>
+            <Text style={styles.textonome}>JÚLIA{nome}</Text>
             <Text style={styles.textonorm}>Você foi o ganhador (a)!</Text>
             <View>
                <TouchableOpacity style={styles.btn}>
