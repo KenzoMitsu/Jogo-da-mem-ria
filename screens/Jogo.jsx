@@ -1,4 +1,5 @@
-import {Text, View, StyleSheet, ScrollView, Alert} from "react-native";
+import {Text, View, ScrollView, Alert} from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../design/colors";
 
 export default function HomeScreen() {
