@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -12,6 +13,13 @@ import Parabens from "./screens/Parabens.jsx";
 const Stack = createStackNavigator();
 
 export default function App() {
+  return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen options={{headerShown: false}} name={"Parabens"} component={Parabens} />
+        </Stack.Navigator>
+      </NavigationContainer>
+  );
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Inicio" screenOptions={{ headerShown: false }}>
