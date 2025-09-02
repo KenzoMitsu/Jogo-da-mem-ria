@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Suas telas
-import Inicio from "./screens/Inicio";
+import Inicio from "./screens/Inicio.jsx";
 import Jogadores from "./screens/Jogadores.jsx";
 import Jogo from "./screens/Jogo.jsx";
 import Parabens from "./screens/Parabens.jsx";
@@ -12,6 +13,13 @@ import Parabens from "./screens/Parabens.jsx";
 const Stack = createStackNavigator();
 
 export default function App() {
+  return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen options={{headerShown: false}} name={"Parabens"} component={Parabens} />
+        </Stack.Navigator>
+      </NavigationContainer>
+  );
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Jogo" screenOptions={{ headerShown: false }}>

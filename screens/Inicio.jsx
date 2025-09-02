@@ -2,6 +2,7 @@ import {Image, ImageBackground, Text, TouchableOpacity, View, StyleSheet} from "
 
 export default function Inicio() {
     return (
+
         <ImageBackground
             source={require("../assets/Android Compact - 5.png")}
             style={styles.background}
@@ -22,7 +23,7 @@ export default function Inicio() {
                 </TouchableOpacity>
 
                 <Text style={styles.textoInfo}>
-                    Clique em “Jogar” para começar !
+                    Clique em “Jogar” para começar!
                 </Text>
             </View>
         </ImageBackground>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     imagem: {
-        width: 150,
+        width: 300,
         height: 150,
         marginVertical: 10,
     },
