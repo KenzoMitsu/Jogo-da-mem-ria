@@ -1,6 +1,6 @@
-import {Text, View, StyleSheet, ScrollView, Alert} from "react-native";
+import {Text, View, ScrollView, Alert} from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../design/colors";
-import {getObjects, saveObjects} from "../storage/LocalStorage";
 
 export default function HomeScreen() {
     const [lista, setLista] = useState([])
@@ -125,15 +125,3 @@ export default function HomeScreen() {
         </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    containerBotoes: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginHorizontal: sizes.margin_horizontal,
-        marginTop: sizes.padding_large,
-        paddingBottom: sizes.padding_large,
-        borderBottomWidth: 2,
-        borderBottomColor: colors.gray_330
-    }
-})

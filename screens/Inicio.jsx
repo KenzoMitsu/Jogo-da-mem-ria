@@ -1,4 +1,4 @@
-import {View} from "react-native";
+import {Image, ImageBackground, Text, TouchableOpacity, View, StyleSheet} from "react-native";
 
 export default function Inicio() {
     return (
@@ -10,7 +10,7 @@ export default function Inicio() {
                 <Text style={styles.titulo}>JUNGLE</Text>
 
                 <Image
-                    source={require("../assets/logo.png")} 
+                    source={require("../assets/logo.png")}
                     style={styles.imagem}
                     resizeMode="contain"
                 />
