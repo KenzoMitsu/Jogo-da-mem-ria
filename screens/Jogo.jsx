@@ -1,6 +1,5 @@
 import {Text, View, StyleSheet, ScrollView, Alert} from "react-native";
 import colors from "../design/colors";
-import {getObjects, saveObjects} from "../storage/LocalStorage";
 
 export default function HomeScreen() {
     const [lista, setLista] = useState([])
