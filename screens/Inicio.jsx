@@ -1,4 +1,4 @@
-import {Image, ImageBackground, Text, TouchableOpacity, View} from "react-native";
+import {Image, ImageBackground, Text, TouchableOpacity, View, StyleSheet} from "react-native";
 
 export default function Inicio() {
     return (

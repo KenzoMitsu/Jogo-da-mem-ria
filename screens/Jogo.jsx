@@ -125,15 +125,3 @@ export default function HomeScreen() {
         </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    containerBotoes: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginHorizontal: sizes.margin_horizontal,
-        marginTop: sizes.padding_large,
-        paddingBottom: sizes.padding_large,
-        borderBottomWidth: 2,
-        borderBottomColor: colors.gray_330
-    }
-})
