@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Suas telas
-import Inicio from "./screens/Inicio";
+import Inicio from "./screens/Inicio.jsx";
 import Jogadores from "./screens/Jogadores.jsx";
 import Jogo from "./screens/Jogo.jsx";
 import Parabens from "./screens/Parabens.jsx";
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Jogadores" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Inicio" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Inicio" component={Inicio} />
                 <Stack.Screen name="Jogadores" component={Jogadores} />
                 <Stack.Screen name="Jogo" component={Jogo} />
