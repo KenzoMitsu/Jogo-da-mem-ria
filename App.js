@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import Parabens from "./screens/Parabens";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";

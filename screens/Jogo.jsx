@@ -1,4 +1,5 @@
 import {Text, View, ScrollView, Alert} from "react-native";
+import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import colors from "../design/colors";
 
