@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Jogadores" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Jogo" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Inicio" component={Inicio} />
                 <Stack.Screen name="Jogadores" component={Jogadores} />
                 <Stack.Screen name="Jogo" component={Jogo} />
