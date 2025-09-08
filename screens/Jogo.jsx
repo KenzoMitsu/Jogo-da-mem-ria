@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Alert } from 'react-native';
 import Pontos from "../components/Pontos"
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Alert } from "react-native";
+import React, { useState } from 'react';
 import colors from "../design/colors";
 import logo from "../assets/logo.png";
 
