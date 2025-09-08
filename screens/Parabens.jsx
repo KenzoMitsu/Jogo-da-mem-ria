@@ -18,7 +18,7 @@ export default function Parabens({ route, navigation }) {
                 <TouchableOpacity
                     style={styles.btn}
                     // Navega de volta para a tela de jogadores para um novo jogo
-                    onPress={() => navigation.replace('Jogadores')}
+                    onPress={() => navigation.replace('Inicio')}
                 >
                     <Text style={styles.textbtn}>
                         JOGAR NOVAMENTE
