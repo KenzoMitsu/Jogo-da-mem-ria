@@ -1,8 +1,9 @@
-import {Image, ImageBackground, Text, TouchableOpacity, View, StyleSheet} from "react-native";
+import React from 'react';
+import { ImageBackground, Text, TouchableOpacity, View, StyleSheet, Image } from "react-native";
 
-export default function Inicio() {
+// A tela de início agora recebe 'navigation' para poder navegar para outras telas.
+export default function Inicio({ navigation }) {
     return (
-
         <ImageBackground
             source={require("../assets/Android Compact - 5.png")}
             style={styles.background}
@@ -18,7 +19,11 @@ export default function Inicio() {
 
                 <Text style={styles.subtitulo}>MEMORY</Text>
 
-                <TouchableOpacity style={styles.botao}>
+                {/* Este botão agora navega para a tela de Jogadores ao ser pressionado */}
+                <TouchableOpacity
+                    style={styles.botao}
+                    onPress={() => navigation.navigate('Jogadores')}
+                >
                     <Text style={styles.textoBotao}>JOGAR</Text>
                 </TouchableOpacity>
 

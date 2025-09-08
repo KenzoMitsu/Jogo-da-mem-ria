@@ -1,93 +1,82 @@
-import React, {useState} from "react";
-import {View, Text, ScrollView, Image, TouchableOpacity, StyleSheet} from "react-native";
-import colors from "../design/colors";
+import React from "react";
+import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
+// import colors from "../design/colors"; // Removido temporariamente para depuração
 
-export default function Inicio() {
-    const [nome, setnome] = useState([])
-    const [novoUser, setNovoUser] = useState("")
+// Renomeado para Parabens e recebendo { route, navigation }
+export default function Parabens({ route, navigation }) {
+    // Pegando os dados do vencedor que foram passados pela navegação
+    const { vencedor } = route.params;
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.imagemsec}>
+        <View style={styles.container}>
+            <View style={styles.content}>
                 <Image style={styles.img} source={require("../assets/logo.png")} />
+                <Text style={styles.parabens}>PARABÉNS!</Text>
+                <Text style={styles.textonome}>{vencedor.nome.toUpperCase()}</Text>
+                <Text style={styles.textonorm}>Você ganhou com {vencedor.pontuacao} pontos!</Text>
+
+                <TouchableOpacity
+                    style={styles.btn}
+                    // Navega de volta para a tela de jogadores para um novo jogo
+                    onPress={() => navigation.replace('Jogadores')}
+                >
+                    <Text style={styles.textbtn}>
+                        JOGAR NOVAMENTE
+                    </Text>
+                </TouchableOpacity>
             </View>
-            <Text style={styles.parabens}>PARABÉNS!</Text>
-            <Text style={styles.textonome}>JÚLIA{nome}</Text>
-            <Text style={styles.textonorm}>Você foi o ganhador (a)!</Text>
-            <View>
-               <TouchableOpacity style={styles.btn}>
-                   <Text style={styles.textbtn}>
-                       JOGAR NOVAMENTE
-                   </Text>
-               </TouchableOpacity>
-            </View>
-        </ScrollView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: "#e5ead4",
-    },
-    imagemsec: {
         justifyContent: "center",
         alignItems: "center",
+        padding: 20,
+    },
+    content: {
+        width: '100%',
+        alignItems: 'center',
     },
     img: {
-        marginTop: 50,
-        width: "70%",
-        height: "70%",
-        alignItems: "center",
-        justifyContent: "center",
-        display: "flex",
-        flexDirection: "row",
+        width: 150,
+        height: 150,
+        resizeMode: 'contain',
+        marginBottom: 30,
     },
-
     parabens: {
-        fontFamily: "Arial",
-        fontSize: 30,
-        color: colors.verde_base,
+        fontSize: 32,
+        color: "#45936c",
         fontWeight: "bold",
-        marginTop: 40,
-        textAlign: "center",
+        marginBottom: 20,
     },
-
     textonorm: {
-        fontFamily: "Arial",
         fontSize: 20,
-        color: colors.verde_base,
-        marginTop: 10,
+        color: "#45936c",
         textAlign: "center",
         fontWeight: "bold",
+        marginBottom: 10,
     },
     textonome: {
-        fontFamily: "Arial",
-        fontSize: 25,
-        color: colors.verde_escuro,
+        fontSize: 28,
+        color: "#334f53",
         fontWeight: "bold",
         textAlign: "center",
-        marginTop: 10,
+        marginBottom: 10,
     },
     btn: {
-        flexDirection: "row",
-        backgroundColor: colors.verde_base,
-        paddingBottom: 10,
-        paddingTop: 10,
-        paddingLeft: 20,
-        paddingRight: 20,
-        marginTop: 55,
-        marginLeft: 90,
-        marginRight: 90,
-        textAlign: "center",
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: "#45936c",
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        marginTop: 40,
         borderRadius: 10,
-
     },
     textbtn: {
-        fontSize: 17,
-        fontFamily: "Arial",
+        fontSize: 18,
         fontWeight: "bold",
-        textAlign: "center",
+        color: "#1f0a1d",
     }
-})
+});

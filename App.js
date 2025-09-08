@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -13,16 +12,14 @@ import Parabens from "./screens/Parabens.jsx";
 const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen options={{headerShown: false}} name={"Parabens"} component={Parabens} />
-        </Stack.Navigator>
-      </NavigationContainer>
-  );
+    // Agora temos um único return com todas as telas declaradas.
+    // O navegador agora conhece todas as rotas possíveis.
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Jogo" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator
+                initialRouteName="Inicio"
+                screenOptions={{ headerShown: false }}
+            >
                 <Stack.Screen name="Inicio" component={Inicio} />
                 <Stack.Screen name="Jogadores" component={Jogadores} />
                 <Stack.Screen name="Jogo" component={Jogo} />
