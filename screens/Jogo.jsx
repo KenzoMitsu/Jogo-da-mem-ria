@@ -1,8 +1,5 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import {Text, View, ScrollView, Alert} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Alert } from "react-native";
 import React, { useState } from 'react';
-import { StyleSheet } from "react-native";
 import colors from "../design/colors";
 
 export default function TelaJogo() {
