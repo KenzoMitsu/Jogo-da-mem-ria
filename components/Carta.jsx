@@ -1,92 +1,53 @@
 import React from 'react';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-
-
-
-export default function Carta({ item, onPress, estaVirada, parEncontrado }) {
-    const deveMostrarEmoji = estaVirada || parEncontrado;
+export default function Carta({ item, verso, onPress, estaVirada, parEncontrado }) {
+    const deveMostrarImagem = estaVirada || parEncontrado;
 
     return (
-
         <TouchableOpacity
-
             style={[
-
                 styles.card,
-
-                deveMostrarEmoji ? styles.cardVirada : styles.cardEscondida,
-
-                parEncontrado && styles.cardEncontrada
-
+                deveMostrarImagem ? styles.cardVirada : styles.cardEscondida,
+                parEncontrado && styles.cardEncontrada,
             ]}
-
             onPress={onPress}
-
             activeOpacity={0.7}
-
         >
-
-            <Text style={styles.emoji}>{deveMostrarEmoji ? item.emoji : '?'}</Text>
-
+            {deveMostrarImagem ? (
+                <Image source={item.imagem} style={styles.imagem} resizeMode="contain" />
+            ) : (
+                <Image source={verso} style={styles.imagem} resizeMode="contain" />
+            )}
         </TouchableOpacity>
-
     );
-
 }
 
-
-
 const styles = StyleSheet.create({
-
     card: {
-
-        width: 80,
-
-        height: 80,
-
-        borderRadius: 10,
-
-        margin: 8,
-
+        width: 70,            // menor largura
+        height: 70,           // menor altura
+        borderRadius: 8,      // arredondado suave
+        margin: 5,            // menos espaçamento entre cartas
         justifyContent: 'center',
-
         alignItems: 'center',
-
-        borderWidth: 2,
-
+        borderWidth: 1,       // borda mais fina
+        borderColor: '#285943', // mantenha a cor desejada
     },
-
     cardEscondida: {
-
         backgroundColor: '#81c784',
-
-        borderColor: '#285943',
-
     },
-
     cardVirada: {
-
         backgroundColor: '#ffffff',
-
         borderColor: '#35926b',
-
     },
-
     cardEncontrada: {
-
         backgroundColor: '#a5d6a7',
-
         borderColor: '#35926b',
-
         opacity: 0.7,
-
     },
-
-    emoji: {
-
-        fontSize: 40,
-
-    }
-
+    imagem: {
+        width: 100,            // diminua imagem para ajustar na carta menor
+        height: 100,
+    },
 });

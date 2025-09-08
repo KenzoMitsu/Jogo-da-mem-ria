@@ -1,20 +1,54 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Image, FlatList, Alert } from "react-native";
-import Carta from '../components/Carta'; // Criaremos este componente!
-// import colors from "../design/colors"; // Removido temporariamente para depuração
+import Carta from '../components/Carta';
 
-// Emojis para as cartas
-const EMOJIS = ['🐘', '🐅', '🐒', '🦓', '🦒', '🦁', '🐊', '🦏', ' hippopotamo', '🐆'];
+// Array com as 25 imagens disponíveis
+const CARTAS = [
+    require("../assets/1.png"),
+    require("../assets/2.png"),
+    require("../assets/3.png"),
+    require("../assets/4.png"),
+    require("../assets/5.png"),
+    require("../assets/6.png"),
+    require("../assets/7.png"),
+    require("../assets/8.png"),
+    require("../assets/9.png"),
+    require("../assets/10.png"),
+    require("../assets/11.png"),
+    require("../assets/12.png"),
+    require("../assets/13.png"),
+    require("../assets/14.png"),
+    require("../assets/15.png"),
+    require("../assets/16.png"),
+    require("../assets/17.png"),
+    require("../assets/18.png"),
+    require("../assets/19.png"),
+    require("../assets/20.png"),
+    require("../assets/21.png"),
+    require("../assets/22.png"),
+    require("../assets/23.png"),
+    require("../assets/24.png"),
+    require("../assets/25.png"),
+];
 
-// Função para embaralhar as cartas
+const VERSO_CARTA = require("../assets/26.png");
+
+// Função para embaralhar arrays
 const embaralhar = (array) => {
-    let currentIndex = array.length, randomIndex;
+    let novoArray = array.slice();
+    let currentIndex = novoArray.length, randomIndex;
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        [novoArray[currentIndex], novoArray[randomIndex]] = [novoArray[randomIndex], novoArray[currentIndex]];
     }
-    return array;
+    return novoArray;
+};
+
+// Função para escolher N itens aleatórios de um array, sem repetir
+const escolherRandomicamente = (array, n) => {
+    const arrayEmbaralhado = embaralhar(array);
+    return arrayEmbaralhado.slice(0, n);
 };
 
 export default function Jogo({ route, navigation }) {
@@ -31,84 +65,96 @@ export default function Jogo({ route, navigation }) {
 
     const timeoutRef = useRef(null);
 
-    // Gera as cartas para o nível atual
+    // Gera as cartas para o nível atual com pares aleatórios
     const gerarCartas = () => {
-        const numPares = 1 + nivel; // Nível 1 = 2 pares (4 cartas), Nível 2 = 3 pares (6 cartas), etc.
-        const emojisParaNivel = EMOJIS.slice(0, numPares);
-        const novasCartas = [...emojisParaNivel, ...emojisParaNivel].map((emoji, index) => ({
-            id: index,
-            emoji: emoji,
-        }));
-        setCartas(embaralhar(novasCartas));
+        const numPares = 1 + nivel; // par progressivo por nível
+
+        // Seleciona N imagens aleatórias para o nível atual
+        const imagensParaNivel = escolherRandomicamente(CARTAS, numPares);
+
+        // Cria pares e atribui ids únicos
+        let novasCartas = [];
+        imagensParaNivel.forEach((imagem, idx) => {
+            novasCartas.push({ id: idx * 2, imagem });
+            novasCartas.push({ id: idx * 2 + 1, imagem });
+        });
+
+        novasCartas = embaralhar(novasCartas);
+
+        setCartas(novasCartas);
         setParesEncontrados([]);
         setCartasViradas([]);
     };
 
-    // Inicia o jogo e gera novas cartas quando o nível muda
     useEffect(() => {
         gerarCartas();
     }, [nivel]);
 
-    // Lógica para verificar se as cartas viradas formam um par
     useEffect(() => {
         if (cartasViradas.length < 2) return;
 
         const primeiraCarta = cartas[cartasViradas[0]];
         const segundaCarta = cartas[cartasViradas[1]];
 
-        if (primeiraCarta.emoji === segundaCarta.emoji) {
-            // É um par!
-            setParesEncontrados([...paresEncontrados, primeiraCarta.emoji]);
-            if (jogadorAtual === 1) {
-                setPontuacaoJogador1(pontuacaoJogador1 + 10);
-            } else {
-                setPontuacaoJogador2(pontuacaoJogador2 + 10);
-            }
-            setCartasViradas([]); // Limpa para a próxima jogada
-        } else {
-            // Não é um par
-            if (jogadorAtual === 1) {
-                setPontuacaoJogador1(Math.max(0, pontuacaoJogador1 - 3));
-            } else {
-                setPontuacaoJogador2(Math.max(0, pontuacaoJogador2 - 3));
-            }
-            // Vira as cartas de volta após um tempo
+        if (primeiraCarta.imagem === segundaCarta.imagem) {
+            setParesEncontrados(prev => [...prev, primeiraCarta.id, segundaCarta.id]);
+            setCartasViradas([]);
+
+            setPontuacaoJogador1(prev => {
+                if (jogadorAtual === 1) return prev + 10;
+                return prev;
+            });
+            setPontuacaoJogador2(prev => {
+                if (jogadorAtual === 2) return prev + 10;
+                return prev;
+            });
+        }
+        else {
+            setPontuacaoJogador1(prev => {
+                if (jogadorAtual === 1) return Math.max(0, prev - 3);
+                return prev;
+            });
+            setPontuacaoJogador2(prev => {
+                if (jogadorAtual === 2) return Math.max(0, prev - 3);
+                return prev;
+            });
+
             timeoutRef.current = setTimeout(() => {
                 setCartasViradas([]);
-                // Muda o jogador apenas se errar
-                setJogadorAtual(jogadorAtual === 1 ? 2 : 1);
+                setJogadorAtual(prev => (prev === 1 ? 2 : 1));
             }, 1000);
         }
 
-        // Limpa o timeout se o componente for desmontado
         return () => clearTimeout(timeoutRef.current);
-
     }, [cartasViradas]);
 
-    // Verifica se o jogador encontrou todos os pares para avançar de nível ou terminar o jogo
     useEffect(() => {
-        if (cartas.length > 0 && paresEncontrados.length === cartas.length / 2) {
-            if (nivel < 4) { // Joga até 10 cartas (5 pares, nível 4)
-                Alert.alert("Parabéns!", "Você encontrou todos os pares. Próximo nível!");
-                setNivel(nivel + 1);
+        if (cartas.length > 0 && paresEncontrados.length === cartas.length) {
+            if (nivel < 4) {
+                Alert.alert(
+                    "Parabéns!",
+                    "Você encontrou todos os pares. Próximo nível!",
+                    [{ text: "OK", onPress: () => setNivel(prev => prev + 1) }],
+                    { cancelable: false }
+                );
             } else {
-                // Fim de jogo
                 const vencedor = pontuacaoJogador1 >= pontuacaoJogador2
                     ? { nome: jogador1, pontuacao: pontuacaoJogador1 }
                     : { nome: jogador2, pontuacao: pontuacaoJogador2 };
-
                 navigation.replace('Parabens', { vencedor });
             }
         }
     }, [paresEncontrados]);
 
-
     const virarCarta = (index) => {
-        // Impede de virar mais de 2 cartas, ou a mesma carta duas vezes, ou uma carta que já faz parte de um par
-        if (cartasViradas.length >= 2 || cartasViradas.includes(index) || paresEncontrados.includes(cartas[index].emoji)) {
+        if (
+            cartasViradas.length >= 2 ||
+            cartasViradas.includes(index) ||
+            paresEncontrados.includes(cartas[index].id)
+        ) {
             return;
         }
-        setCartasViradas([...cartasViradas, index]);
+        setCartasViradas(prev => [...prev, index]);
     };
 
     return (
@@ -138,9 +184,10 @@ export default function Jogo({ route, navigation }) {
                 renderItem={({ item, index }) => (
                     <Carta
                         item={item}
+                        verso={VERSO_CARTA}
                         onPress={() => virarCarta(index)}
                         estaVirada={cartasViradas.includes(index)}
-                        parEncontrado={paresEncontrados.includes(item.emoji)}
+                        parEncontrado={paresEncontrados.includes(item.id)}
                     />
                 )}
             />
